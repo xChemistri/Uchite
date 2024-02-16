@@ -2,26 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Word : MonoBehaviour
+public class Word
 {
-    public enum Gender
+    public enum GENDER
     {
-        MALE, FEMALE, NEUTER, PLURAL
+        MALE, 
+        FEMALE, 
+        NEUTER, 
+        PLURAL
     }
 
-    public enum Case
+    public enum CASE
     {
-        NOM, GEN, DAT, ACC, INST, PREP
+        NOMINATIVE,
+        GENITIVE, 
+        DATIVE, 
+        ACCUSATIVE, 
+        INSTRUMENTAL, 
+        PREPOSITIONAL, 
+        VOCATIVE
     }
 
-    private string[][] translations;
-    private string word;
+    [SerializeField] private GENDER gender;
+    [SerializeField] private CASE declension;
+    [SerializeField] private string word;
 
-    string translate(Gender gender, Case declension)
+    public GENDER Gender ()
     {
-        return translations[(int)gender][(int)declension];
+        return gender;
     }
 
-    void Start() {}
-    void Update() {}
+    private CASE Case ()
+    {
+        return declension;
+    }
 }
