@@ -1,93 +1,70 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine; 
+using System.IO;
 
+[System.Serializable]
 public class AdjectiveEntry
 {
-    [SerializeField] private string translation;
-    [SerializeField] private bool isIrregular;
-    [SerializeField] private string entry;
+    public string translation = "";
+    public bool isIrregular = true;
+    
+    //Order goes from [MASC, FEM, NEU, PL] in ALL cases.
+    public string[] nominative;         //Int 0
+    public string[] genitive;           //Int 1
+    public string[] dative;             //Int 2
+    public string[] accusative_anim;    //Int 3
+    public string[] accusative_inam;    //Int 4
+    public string[] instrumental;       //Int 5
+    public string[] prepositional;      //Int 6
+    public string[] shortform;          //Int 7
 
-    public void Initialize()
+    public static AdjectiveEntry Create (string word)
     {
-
+        string data = File.ReadAllText("Assets\\Dictionary\\" + word + ".json");
+        return JsonUtility.FromJson<AdjectiveEntry>(data);
     }
 
-    public string GetAs(Word.GENDER gen, Word.CASE cas)
+    public void CreateEntry (string stem, string translation)
     {
-        string part = entry.Substring(0, entry.Length-2);
+        this.translation = translation;
+        isIrregular = false;
 
-        if (isIrregular)
+        nominative = new[] {stem+"ый", stem+"ая", stem+"ое", stem+"ые"};
+        genitive = new[] {stem+"ого", stem+"ой", stem+"ого", stem+"ых"};
+        dative = new[] {stem+"ому", stem+"ой", stem+"ому", stem+"ым"};
+        accusative_anim = new[] {stem+"ого", stem+"ую", stem+"ого", stem+"ых"};
+        accusative_inam = new[] {stem+"ый", stem+"ую", stem+"ое", stem+"ые"};
+        instrumental = new[] {stem+"ым", stem+"ой", stem+"ым", stem+"ыми"};
+        prepositional = new[] {stem+"ом", stem+"ой", stem+"ом", stem+"ых"};
+        shortform = new[] {stem, stem+"о", stem+"а", stem+"ы"};
+    }
+    public string Translate ()
+    {
+        return translation;
+    }
+
+    public string GetAs(int gender, int declination)
+    {
+        switch (declination)
         {
-            return "irregular";
-        }
-        else
-        {
-            switch (cas)
-            {
-                case Word.CASE.NOMINATIVE:
-                    switch (gen)
-                    {
-                        case Word.GENDER.MALE:
-                        case Word.GENDER.FEMALE:
-                        case Word.GENDER.NEUTER:
-                        case Word.GENDER.PLURAL:
-                        default:
-                            return "heheheha";
-                    }
-                case Word.CASE.GENITIVE:
-                    switch (gen)
-                    {
-                        case Word.GENDER.MALE:
-                        case Word.GENDER.FEMALE:
-                        case Word.GENDER.NEUTER:
-                        case Word.GENDER.PLURAL:
-                        default:
-                            return "heheheha";
-                    }
-                case Word.CASE.DATIVE:
-                    switch (gen)
-                    {
-                        case Word.GENDER.MALE:
-                        case Word.GENDER.FEMALE:
-                        case Word.GENDER.NEUTER:
-                        case Word.GENDER.PLURAL:
-                        default:
-                            return "heheheha";
-                    }
-                case Word.CASE.ACCUSATIVE:
-                    switch (gen)
-                    {
-                        case Word.GENDER.MALE:
-                        case Word.GENDER.FEMALE:
-                        case Word.GENDER.NEUTER:
-                        case Word.GENDER.PLURAL:
-                        default:
-                            return "heheheha";
-                    }
-                case Word.CASE.INSTRUMENTAL:
-                    switch (gen)
-                    {
-                        case Word.GENDER.MALE:
-                        case Word.GENDER.FEMALE:
-                        case Word.GENDER.NEUTER:
-                        case Word.GENDER.PLURAL:
-                        default:
-                            return "heheheha";
-                    }
-                case Word.CASE.PREPOSITIONAL:
-                    switch (gen)
-                    {
-                        case Word.GENDER.MALE:
-                        case Word.GENDER.FEMALE:
-                        case Word.GENDER.NEUTER:
-                        case Word.GENDER.PLURAL:
-                        default:
-                            return "heheheha";
-                    }
-                default:
-                    return "heheheha";
-            }
+            case 0:
+            default:
+                return nominative[gender];
+            case 1:
+                return genitive[gender];
+            case 2:
+                return dative[gender];
+            case 3:
+                return accusative_anim[gender];
+            case 4:
+                return accusative_inam[gender];
+            case 5:
+                return instrumental[gender];
+            case 6:
+                return prepositional[gender];
+            case 7:
+                return shortform[gender];
         }
     }
 }
