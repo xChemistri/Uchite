@@ -19,7 +19,7 @@ public class AdjectiveEntry
     public string[] prepositional;      //Int 6
     public string[] shortform;          //Int 7
 
-    public static AdjectiveEntry Create (string word)
+    public static AdjectiveEntry Grab (string word)
     {
         string data = File.ReadAllText("Assets\\Dictionary\\" + word + ".json");
         return JsonUtility.FromJson<AdjectiveEntry>(data);
@@ -38,7 +38,13 @@ public class AdjectiveEntry
         instrumental = new[] {stem+"ым", stem+"ой", stem+"ым", stem+"ыми"};
         prepositional = new[] {stem+"ом", stem+"ой", stem+"ом", stem+"ых"};
         shortform = new[] {stem, stem+"о", stem+"а", stem+"ы"};
+
+        string data = JsonUtility.ToJson(this, true);
+        File.WriteAllText("Assets\\Dictionary\\" + nominative[0] + ".json", data);
+
+        Debug.Log("Written");
     }
+
     public string Translate ()
     {
         return translation;
