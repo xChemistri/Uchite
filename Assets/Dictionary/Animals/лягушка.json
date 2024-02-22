@@ -1,0 +1,14 @@
+{
+    "isIrregular" : false,
+    "translation" : "frog",
+    "plural"      : "frogs",
+    "gender" : 1,
+    "animate": 1,
+
+    "nominative"        : ["лягушка", "лягушки"],
+    "genitive"          : ["лягушки", "лягушек"],
+    "dative"            : ["лягушке", "лягушкам"],
+    "accusative"        : ["лягушку", "лягушек"],
+    "instrumental"      : ["лягушкой", "лягушками"],
+    "prepositional"     : ["лягушке", "лягушках"]
+}

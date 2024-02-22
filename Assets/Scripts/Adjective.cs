@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 
 [System.Serializable]
-public class AdjectiveEntry
+public class Adjective
 {
     public string translation = "";
     public bool isIrregular = true;
@@ -19,10 +19,10 @@ public class AdjectiveEntry
     public string[] prepositional;      //Int 6
     public string[] shortform;          //Int 7
 
-    public static AdjectiveEntry Grab (string word)
+    public static Adjective Grab (string word)
     {
         string data = File.ReadAllText("Assets\\Dictionary\\" + word + ".json");
-        return JsonUtility.FromJson<AdjectiveEntry>(data);
+        return JsonUtility.FromJson<Adjective>(data);
     }
 
     public void CreateEntry (string stem, string translation)
