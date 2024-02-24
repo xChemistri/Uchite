@@ -22,7 +22,7 @@ public class Export : MonoBehaviour
 
     public void Create ()
     {
-        Adjective thing = new Adjective();
+        AdjectiveEntry thing = new AdjectiveEntry();
         thing.CreateEntry(stem, translation);
 
         Debug.Log("Out call");

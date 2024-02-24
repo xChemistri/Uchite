@@ -1,0 +1,13 @@
+{
+    "infinitive": "говорить",
+    "engpast": "speak",
+    "engpresent": "spoke",
+
+    "pair": "сказать",
+    "imperfective": true,
+    "isIrregular": false,
+
+    "past": ["говорил", "говорила", "говорило", "говорили"],
+    "present": ["говорю", "говоришь", "говорит", "говорим" ,"говорите", "говорят"],
+    "future": []
+}

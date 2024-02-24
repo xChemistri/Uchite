@@ -1,0 +1,13 @@
+{
+    "infinitive": "есть",
+    "engpast": "eat",
+    "engpresent": "ate",
+
+    "pair": "съесть",
+    "imperfective": true,
+    "isIrregular": true,
+
+    "past": ["ел", "ела", "ело", "ели"],
+    "present": ["ем", "ешь", "едят", "едим" ,"едите", "едят"],
+    "future": []
+}

@@ -1,0 +1,13 @@
+{
+    "infinitive": "пить",
+    "engpast": "drink",
+    "engpresent": "drank",
+
+    "pair": "съесть",
+    "imperfective": true,
+    "isIrregular": true,
+
+    "past": ["пил", "пила", "пило", "пили"],
+    "present": ["пью", "пьёшь", "пьёт", "пьём" ,"пьёте", "пьют"],
+    "future": []
+}
