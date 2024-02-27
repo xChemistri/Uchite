@@ -1,0 +1,14 @@
+{
+    "isIrregular" : true,
+    "translation" : "coffee",
+    "plural"      : "coffee",
+    "gender" : 0,
+    "animate": 0,
+
+    "nominative"        : ["кофе", "кофе"],
+    "genitive"          : ["кофе", "кофе"],
+    "dative"            : ["кофе", "кофе"],
+    "accusative"        : ["кофе", "кофе"],
+    "instrumental"      : ["кофе", "кофе"],
+    "prepositional"     : ["кофе", "кофе"]
+}

@@ -1,0 +1,14 @@
+{
+    "isIrregular" : false,
+    "translation" : "water",
+    "plural"      : "water",
+    "gender" : 1,
+    "animate": 0,
+
+    "nominative"        : ["вода", "воды"],
+    "genitive"          : ["воды", "вод"],
+    "dative"            : ["воде", "водам"],
+    "accusative"        : ["воду", "воды"],
+    "instrumental"      : ["водой", "водами"],
+    "prepositional"     : ["воде", "водах"]
+}

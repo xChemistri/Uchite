@@ -1,0 +1,14 @@
+{
+    "isIrregular" : true,
+    "translation" : "juice",
+    "plural"      : "juices",
+    "gender" : 0,
+    "animate": 0,
+
+    "nominative"        : ["сок"],
+    "genitive"          : ["сока"],
+    "dative"            : ["соку"],
+    "accusative"        : ["сок"],
+    "instrumental"      : ["соком"],
+    "prepositional"     : ["соке"]
+}

@@ -1,0 +1,14 @@
+{
+    "isIrregular" : true,
+    "translation" : "bread",
+    "plural"      : "bread",
+    "gender" : 0,
+    "animate": 0,
+
+    "nominative"        : ["хлеб", "хлебы"],
+    "genitive"          : ["хлеба", "хлебов"],
+    "dative"            : ["хлебу", "хлебам"],
+    "accusative"        : ["хлеб", "хлебы"],
+    "instrumental"      : ["хлебом", "хлебами"],
+    "prepositional"     : ["хлебе", "хлебах"]
+}

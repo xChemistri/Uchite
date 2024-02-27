@@ -1,0 +1,14 @@
+{
+    "isIrregular" : true,
+    "translation" : "I",
+    "plural"      : "we",
+    "gender" : 0,
+    "animate": 1,
+
+    "nominative"        : ["я", "мы"],
+    "genitive"          : ["меня", "нас"],
+    "dative"            : ["мне", "нам"],
+    "accusative"        : ["меня", "нас"],
+    "instrumental"      : ["мной", "нами"],
+    "prepositional"     : ["мне", "нас"]
+}

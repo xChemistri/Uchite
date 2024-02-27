@@ -1,0 +1,14 @@
+{
+    "isIrregular" : true,
+    "translation" : "she",
+    "plural"      : "they",
+    "gender" : 1,
+    "animate": 1,
+
+    "nominative"        : ["она", "они"],
+    "genitive"          : ["её", "их"],
+    "dative"            : ["ей", "им"],
+    "accusative"        : ["её", "их"],
+    "instrumental"      : ["ей", "ими"],
+    "prepositional"     : ["ней", "них"]
+}
