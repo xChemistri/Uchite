@@ -1,0 +1,14 @@
+{
+    "isIrregular" : false,
+    "translation" : "milk",
+    "plural"      : "milk",
+    "gender" : 2,
+    "animate": 0,
+
+    "nominative"        : ["молоко", "молоко"],
+    "genitive"          : ["молока", "молока"],
+    "dative"            : ["молоко", "молоко"],
+    "accusative"        : ["молока", "молока"],
+    "instrumental"      : ["молоком", "молоком"],
+    "prepositional"     : ["молоке", "молоке"]
+}

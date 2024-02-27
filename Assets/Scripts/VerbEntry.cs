@@ -25,7 +25,7 @@ public class VerbEntry
 
     public static VerbEntry Grab (string word)
     {
-        string data = File.ReadAllText("Assets\\Dictionary\\" + word + ".json");
+        string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");
         return JsonUtility.FromJson<VerbEntry>(data);
     }
 
@@ -34,7 +34,7 @@ public class VerbEntry
         if (pair == "")
             return null;
 
-        string data = File.ReadAllText("Assets\\Dictionary\\" + pair + ".json");
+        string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + pair + ".json");
         return JsonUtility.FromJson<VerbEntry>(pair);
     }
     public string Translate (int mode)

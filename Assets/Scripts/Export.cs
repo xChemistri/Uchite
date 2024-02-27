@@ -20,6 +20,11 @@ public class Export : MonoBehaviour
         
     }
 
+    public void Test ()
+    {
+        Sentence s = new Sentence();
+        Debug.Log(s.RuString());
+    }
     public void Create ()
     {
         AdjectiveEntry thing = new AdjectiveEntry();
