@@ -77,10 +77,10 @@ public class Subject
 
         foreach (Adjective a in adjectives)
         {
-            str += a.RuString() + " ";
+            str += a.EnString() + " ";
         }
         
-        return (str + word.GetAs(plural ? 1 : 0, declension));
+        return (str + (plural ? word.plural : word.translation));
     }
 
     private void ExceptionCheck ()

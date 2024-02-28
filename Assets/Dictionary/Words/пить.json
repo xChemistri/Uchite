@@ -1,7 +1,7 @@
 {
     "infinitive": "пить",
-    "engpast": "drink",
-    "engpresent": "drank",
+    "engpast": "drank",
+    "engpresent": "drink",
 
     "pair": "съесть",
     "imperfective": true,

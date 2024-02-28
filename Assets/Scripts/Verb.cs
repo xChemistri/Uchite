@@ -26,6 +26,7 @@ public class Verb
         System.Random gen = new System.Random();
 
         Verb ver = new Verb();
+        ver.infinitive = false;
         ver.word = VerbEntry.Grab(list[gen.Next(list.Length)]);
         return ver;
     }
@@ -34,6 +35,7 @@ public class Verb
     {
         return word.GetAs(tense, conjugation);
     }
+
     public string EnString ()
     {
         if (infinitive) return word.Translate(0);

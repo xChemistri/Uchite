@@ -1,7 +1,7 @@
 {
     "infinitive": "есть",
-    "engpast": "eat",
-    "engpresent": "ate",
+    "engpast": "ate",
+    "engpresent": "eat",
 
     "pair": "съесть",
     "imperfective": true,
