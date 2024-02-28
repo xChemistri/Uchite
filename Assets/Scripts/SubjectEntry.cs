@@ -22,6 +22,9 @@ public class SubjectEntry
     public string[] instrumental;       // Case 4
     public string[] prepositional;      // Case 5
 
+    public string[] possible_adjectives;
+    public string[] possible_verbs;
+
     public static SubjectEntry Grab (string word)
     {
         string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");
@@ -32,7 +35,7 @@ public class SubjectEntry
     {
         return translation;
     }
-
+    
     public string GetAs(int plural, int declination)
     {
         switch (declination)

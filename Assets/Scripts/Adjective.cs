@@ -28,6 +28,16 @@ public class Adjective
         return adj;
     }
 
+    public static Adjective RandomFromList (string[] list)
+    {
+        System.Random gen = new System.Random();
+
+        Adjective adj = new Adjective();
+        adj.word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
+        
+        return adj;
+    }
+
     public string RuString ()
     {
         return word.GetAs(gender, declension);

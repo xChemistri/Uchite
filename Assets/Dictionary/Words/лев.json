@@ -10,5 +10,8 @@
     "dative"            : ["льву", "львам"],
     "accusative"        : ["льва", "львов"],
     "instrumental"      : ["львом", "львами"],
-    "prepositional"     : ["льве", "львах"]
+    "prepositional"     : ["льве", "львах"],
+
+    "possible_adjectives": ["белый", "большой", "жёлтый", "массивный"],
+    "possible_verbs": ["есть", "пить", "спать"]
 }

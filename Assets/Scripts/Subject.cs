@@ -54,7 +54,7 @@ public class Subject
         sub.ExceptionCheck();
         
         sub.adjectives = new Adjective[1];
-        sub.adjectives[0] = Adjective.Random();
+        sub.adjectives[0] = Adjective.RandomFromList(sub.word.possible_adjectives);
         sub.adjectives[0].gender = (sub.plural ? 3 : sub.word.gender);
         return sub;
     }

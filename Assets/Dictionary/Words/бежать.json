@@ -1,0 +1,13 @@
+{
+    "infinitive": "бежать",
+    "engpast": "ran",
+    "engpresent": "run",
+
+    "pair": "побежать",
+    "imperfective": true,
+    "isIrregular": false,
+
+    "past": ["бежал", "бежала", "бежало", "бежали"],
+    "present": ["бегу", "бежишь", "бежим", "бежим" ,"бежите", "бегут"],
+    "future": []
+}
