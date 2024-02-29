@@ -1,0 +1,14 @@
+{
+    "isIrregular" : true,
+    "translation" : "pizza",
+    "plural"      : "pizza",
+    "gender" : 1,
+    "animate": 0,
+
+    "nominative"        : ["пицца", "пиццы"],
+    "genitive"          : ["пиццы", "пицц"],
+    "dative"            : ["пицце", "пиццам"],
+    "accusative"        : ["пиццу", "пиццы"],
+    "instrumental"      : ["пиццей", "пиццами"],
+    "prepositional"     : ["пицце", "пиццах"]
+}

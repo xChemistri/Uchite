@@ -22,7 +22,7 @@ public class Export : MonoBehaviour
 
     public void Test ()
     {
-        Sentence s = new Sentence();
+        Statement s = new Statement();
         Debug.Log(s.RuString() + '-' + s.EnString());
     }
     public void Create ()

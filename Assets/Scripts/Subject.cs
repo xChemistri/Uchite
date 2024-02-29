@@ -53,9 +53,19 @@ public class Subject
         sub.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
         sub.ExceptionCheck();
         
-        sub.adjectives = new Adjective[1];
-        sub.adjectives[0] = Adjective.RandomFromList(sub.word.possible_adjectives);
-        sub.adjectives[0].gender = (sub.plural ? 3 : sub.word.gender);
+        sub.adjectives = new Adjective[0];
+
+        if (sub.word.possible_adjectives != null)
+        {
+            sub.adjectives = new Adjective[1];
+
+            for (int i = 0; i < sub.adjectives.Length; i++)
+            {
+                sub.adjectives[i] = Adjective.RandomFromList(sub.word.possible_adjectives);
+                sub.adjectives[i].gender = (sub.plural ? 3 : sub.word.gender);
+            }
+        }
+
         return sub;
     }
 
@@ -63,11 +73,12 @@ public class Subject
     {
         string str = "";
 
+        if (adjectives.Length == 0)
+            return word.GetAs(plural ? 1 : 0, declension);
+
+
         foreach (Adjective a in adjectives)
-        {
             str += a.RuString() + " ";
-        }
-        
         return (str + word.GetAs(plural ? 1 : 0, declension));
     }
 

@@ -1,6 +1,7 @@
 {
     "isIrregular" : false,
     "translation" : "cat",
+    "plural": "cats",
     "gender" : 0,
     "animate": 1,
 

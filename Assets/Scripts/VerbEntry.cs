@@ -23,6 +23,9 @@ public class VerbEntry
     public string[] present;
     public string[] future;
 
+    public string[] predicted_subjects;
+    public int subDeclension;
+
     public static VerbEntry Grab (string word)
     {
         string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");

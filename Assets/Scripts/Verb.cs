@@ -31,6 +31,18 @@ public class Verb
         return ver;
     }
 
+    public Subject RandomDirObject ()
+    {
+        if (word.predicted_subjects == null)
+            return null;
+
+        System.Random gen = new System.Random();
+
+        Subject ans = Subject.Activate(word.predicted_subjects[gen.Next(word.predicted_subjects.Length)]);
+        ans.SetDeclension(word.subDeclension);
+
+        return ans;
+    }
     public string RuString ()
     {
         return word.GetAs(tense, conjugation);

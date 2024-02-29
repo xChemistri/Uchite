@@ -32,10 +32,14 @@ public class Adjective
     {
         System.Random gen = new System.Random();
 
-        Adjective adj = new Adjective();
-        adj.word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
-        
-        return adj;
+        if (list.Length != 0)
+        {
+            Adjective adj = new Adjective();
+            adj.word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
+            return adj;
+        }
+
+        return null;
     }
 
     public string RuString ()
