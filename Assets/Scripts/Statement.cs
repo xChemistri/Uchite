@@ -57,9 +57,21 @@ public class Statement
                 (diro == null ? "" : diro.EnString());
             default:
                 return 
-                (gen.Next(2) == 1 ? "the " : (sub.IsPlural() ? "some " : "a ")) +
+                (gen.Next(2) == 1 ? "The " : (sub.IsPlural() ? "Some " : "A ")) +
                 sub.EnString() + " " + ver.EnString()  + " " + (diro == null ? "" : diro.EnString());
         }
+    }
+    	
+    public bool Verify (string line)
+    {
+        string ans = line.ToLower();
+        string trans = sub.EnString() + " " + ver.EnString() + (diro == null ? "" : " " + diro.EnString());
+        trans = trans.ToLower();
+
+        if (ans.Contains(trans))
+            return true;
+        else
+            return false;
     }
 
     public string RuString ()
