@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
-public class Subject : Translateable
+public class Subject : Translatable
 {
     private int declension = 0;
     private int gender = 0;
@@ -33,42 +33,35 @@ public class Subject : Translateable
         return plural;
     }
 
-    public static Subject Activate (string word)
+    public Subject (string word)
     {
-        Subject sub = new Subject();
-
-        sub.word = SubjectEntry.Grab(word);
-        sub.adjectives = new Adjective[0];
-        sub.gender = sub.word.gender;
-        return sub;
+        this.word = SubjectEntry.Grab(word);
+        this.adjectives = new Adjective[0];
+        this.gender = this.word.gender;
     }
-    public static Subject Random ()
+
+    public Subject ()
     {
         string[] list = File.ReadLines("Assets\\Dictionary\\SubjectMasterList").ToArray();
         System.Random gen = new System.Random();
 
-        Subject sub = new Subject();
-
-        sub.plural = (gen.Next(2) == 1)? true: false;
-        sub.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
-        sub.ExceptionCheck();
+        this.plural = (gen.Next(2) == 1)? true: false;
+        this.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
+        this.ExceptionCheck();
         
-        sub.adjectives = new Adjective[0];
+        this.adjectives = new Adjective[0];
 
-        if (sub.word.possible_adjectives != null)
+        if (this.word.possible_adjectives != null)
         {
-            sub.adjectives = new Adjective[1];
+            this.adjectives = new Adjective[1];
 
-            for (int i = 0; i < sub.adjectives.Length; i++)
+            for (int i = 0; i < this.adjectives.Length; i++)
             {
-                sub.adjectives[i] = Adjective.RandomFromList(sub.word.possible_adjectives);
-                sub.adjectives[i].gender = (sub.plural ? 3 : sub.word.gender);
+                this.adjectives[i] = Adjective.RandomFromList(this.word.possible_adjectives);
+                this.adjectives[i].gender = (this.plural ? 3 : this.word.gender);
             }
         }
-
-        return sub;
     }
-
     public string RuStr ()
     {
         string str = "";
@@ -78,7 +71,7 @@ public class Subject : Translateable
 
 
         foreach (Adjective a in adjectives)
-            str += a.RuString() + " ";
+            str += a.RuStr() + " ";
         return (str + word.GetAs(plural ? 1 : 0, declension));
     }
 
@@ -88,7 +81,7 @@ public class Subject : Translateable
 
         foreach (Adjective a in adjectives)
         {
-            str += a.EnString() + " ";
+            str += a.EnStr() + " ";
         }
         
         return (str + (plural ? word.plural : word.translation));
@@ -99,5 +92,41 @@ public class Subject : Translateable
     {
         if (word.GetAs(0, 0) == "молоко")
             plural = false;
+    }
+
+    // Markovian Sequences
+
+    public Translatable Next()
+    {
+        Verb verb = new Verb();
+
+        switch (word.GetAs(plural ? 1 : 0, declension))
+        {
+            case "я":
+                verb.conjugation = 0;
+                break;
+            case "ты":
+                verb.conjugation = 1;
+                break;
+            case "он":
+            case "она":
+            case "оно":
+                verb.conjugation = 2;
+                break;
+            case "мы":
+                verb.conjugation = 3;
+                break;
+            case "вы":
+                verb.conjugation = 4;
+                break;
+            case "они":
+                verb.conjugation = 5;
+                break;
+            default:
+                verb.conjugation = plural ? 5 : 2;
+                break;
+        }
+
+        return verb;
     }
 }

@@ -8,9 +8,9 @@ public class GameController : MonoBehaviour
     [SerializeField] int streak = 0;
     [SerializeField] Statement statement;
 
-    [SerializeField] TMPro.TextMeshProUGUI text;
-    [SerializeField] TMPro.TextMeshProUGUI input;
-    [SerializeField] TMPro.TextMeshProUGUI streakcnt;
+    [SerializeField] TMPro.TMP_Text text;
+    [SerializeField] TMP_InputField input;
+    [SerializeField] TMP_Text streakcnt;
 
     // Start is called before the first frame update
     void Start ()
@@ -18,32 +18,32 @@ public class GameController : MonoBehaviour
         Statement st = new Statement();
         streakcnt.text = "" + streak;
         statement = new Statement();
-        text.text = statement.RuString();
+        text.text = statement.EnStr();
     }
 
     public void Submit ()
     {
-        if (statement.Verify(input.text))
+        if (statement.Verify(input.text) == 0)
         {
-            Debug.Log("TRUE: " + input.text + ", " + statement.EnString());
+            Debug.Log("TRUE: " + input.text + ", " + statement.RuStr());
 
             streak++;
 
             streakcnt.text = "" + streak;
             statement = new Statement();
-            text.text = statement.RuString();
+            text.text = statement.EnStr();
 
             
         }
         else
         {
-            Debug.Log("FALSE: " + input.text + ", NOT " + statement.EnString());
+            Debug.Log("FALSE: " + input.text + ", NOT " + statement.RuStr());
 
             streak = 0;
 
             streakcnt.text = "" + streak;
             statement = new Statement();
-            text.text = statement.RuString();
+            text.text = statement.EnStr();
         }
     }
 }

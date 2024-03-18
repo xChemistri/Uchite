@@ -4,7 +4,7 @@ using UnityEngine;
 using System.Linq;
 using System.IO;
 
-public class Adjective : Translateable
+public class Adjective : Translatable
 {
     public int gender = 0;
     public int declension = 0;
@@ -50,5 +50,10 @@ public class Adjective : Translateable
     public string EnStr ()
     {
         return word.Translate();
+    }
+
+    public Translatable Next ()
+    {
+        return null;
     }
 }

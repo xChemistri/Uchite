@@ -4,78 +4,57 @@ using UnityEngine;
 
 public class Statement 
 {
-    private Subject sub;
-    private Verb ver;
-    private Subject diro;
+    private readonly int CHOICES = 1;
+    private Translatable[] sentence;
+
 
     public Statement ()
     {
-        sub = Subject.Random();
-        ver = Verb.Random();
-        diro = ver.RandomDirObject();
-
-        if ( sub.IsPlural() )
-            ver.conjugation = 5;
-        else
-            ver.conjugation = 2;
-
-        switch (sub.RuString())
-        {
-            
-            case "я":
-                ver.conjugation = 0;
-                break;
-            case "ты":
-                ver.conjugation = 1;
-                break;
-            case "мы":
-                ver.conjugation = 3;
-                break;
-            case "вы":
-                ver.conjugation = 4;
-                break;
-            default:
-                break;
-        }
-    }
-
-    public string EnString ()
-    {
         System.Random gen = new System.Random();
 
-        switch (sub.RuString())
+        switch (gen.Next(CHOICES + 1))
         {
-            case "я":
-            case "ты":
-            case "он":
-            case "она":
-            case "мы":
-            case "вы":
-            case "они":
-                return sub.EnString() + " " +
-                ver.EnString() + " " +
-                (diro == null ? "" : diro.EnString());
             default:
-                return 
-                (gen.Next(2) == 1 ? "The " : (sub.IsPlural() ? "Some " : "A ")) +
-                sub.EnString() + " " + ver.EnString()  + " " + (diro == null ? "" : diro.EnString());
+            case 1:
+                sentence = new Translatable[4];
+                sentence[0] = new Subject();
+                sentence[1] = sentence[0].Next();
+                sentence[2] = sentence[1].Next();
+                break;
         }
     }
 
-    public bool Verify (string line)
+    public string EnStr ()
     {
-        string ans = line.ToLower();
-        string trans = sub.EnString() + " " + ver.EnString() + (diro == null ? "" : " " + diro.EnString());
-        trans = trans.ToLower();
+        string translation = "";
 
-        if (ans.Contains(trans))
-            return true;
-        else
-            return false;
+        foreach (Translatable word in sentence)
+        {
+            if (word == null) break;
+            translation += word.EnStr() + " ";
+        }
+
+        return translation.Substring(0, translation.Length-1);
     }
 
-    public string RuString ()
+    public int Verify (string line)
     {
-        return sub.RuString() + " " + ver.RuString() + " " + (diro == null ? "" : diro.RuString());
+        if (line.ToLower().Contains(RuStr().ToLower()))
+            return 0;
+        return 1;
+    }
+
+    public string RuStr ()
+    {
+        string translation = "";
+
+        foreach (Translatable word in sentence)
+        {
+            if (word == null) break;
+            
+            translation += word.RuStr() + " ";
+        }
+
+        return translation.Substring(0, translation.Length-1);
     }
 }

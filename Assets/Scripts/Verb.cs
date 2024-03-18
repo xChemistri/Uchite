@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
-public class Verb : Translateable
+public class Verb : Translatable
 {
     public VerbEntry word;
 
@@ -12,33 +12,28 @@ public class Verb : Translateable
     public int tense = 1;
     public int conjugation = 0;
 
-    public static Verb Activate (string word)
+    public Verb (string word)
     {
-        Verb ver = new Verb();
-
-        ver.word = VerbEntry.Grab(word);
-        return ver;
+        this.word = VerbEntry.Grab(word);
     }
 
-    public static Verb Random ()
+    public Verb ()
     {
         string[] list = File.ReadLines("Assets\\Dictionary\\VerbMasterList").ToArray();
         System.Random gen = new System.Random();
 
-        Verb ver = new Verb();
-        ver.infinitive = false;
-        ver.word = VerbEntry.Grab(list[gen.Next(list.Length)]);
-        return ver;
+        infinitive = false;
+        word = VerbEntry.Grab(list[gen.Next(list.Length)]);
     }
 
-    public Subject RandomDirObject ()
+    public Subject RandomDirObj ()
     {
         if (word.predicted_subjects == null)
             return null;
 
         System.Random gen = new System.Random();
 
-        Subject ans = Subject.Activate(word.predicted_subjects[gen.Next(word.predicted_subjects.Length)]);
+        Subject ans = new Subject(word.predicted_subjects[gen.Next(word.predicted_subjects.Length)]);
         ans.SetDeclension(word.subDeclension);
 
         return ans;
@@ -63,5 +58,10 @@ public class Verb : Translateable
             case 2:
                 return word.Translate(4);
         }
+    }
+
+    public Translatable Next ()
+    {
+        return RandomDirObj();
     }
 }
