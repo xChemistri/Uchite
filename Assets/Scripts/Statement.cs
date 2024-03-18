@@ -61,7 +61,7 @@ public class Statement
                 sub.EnString() + " " + ver.EnString()  + " " + (diro == null ? "" : diro.EnString());
         }
     }
-    	
+
     public bool Verify (string line)
     {
         string ans = line.ToLower();

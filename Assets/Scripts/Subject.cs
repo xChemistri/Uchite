@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
-public class Subject 
+public class Subject : Translateable
 {
     private int declension = 0;
     private int gender = 0;
@@ -69,7 +69,7 @@ public class Subject
         return sub;
     }
 
-    public string RuString ()
+    public string RuStr ()
     {
         string str = "";
 
@@ -82,7 +82,7 @@ public class Subject
         return (str + word.GetAs(plural ? 1 : 0, declension));
     }
 
-    public string EnString ()
+    public string EnStr ()
     {
         string str = "";
 

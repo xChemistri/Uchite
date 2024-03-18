@@ -4,7 +4,7 @@ using UnityEngine;
 using System.IO;
 using System.Linq;
 
-public class Verb
+public class Verb : Translateable
 {
     public VerbEntry word;
 
@@ -43,12 +43,12 @@ public class Verb
 
         return ans;
     }
-    public string RuString ()
+    public string RuStr ()
     {
         return word.GetAs(tense, conjugation);
     }
 
-    public string EnString ()
+    public string EnStr ()
     {
         if (infinitive) return word.Translate(0);
 
