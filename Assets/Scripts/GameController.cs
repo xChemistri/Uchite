@@ -32,6 +32,7 @@ public class GameController : MonoBehaviour
             streakcnt.text = "" + streak;
             statement = new Statement();
             text.text = statement.EnStr();
+            input.text = null;
 
             
         }
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
             streakcnt.text = "" + streak;
             statement = new Statement();
             text.text = statement.EnStr();
+            input.text = null;
         }
     }
 }

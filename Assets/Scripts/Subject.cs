@@ -90,12 +90,11 @@ public class Subject : Translatable
     }
 
     // Markovian Sequences
-
     public Translatable Next()
     {
         System.Random gen = new System.Random();
             int tense = gen.Next(3);
-            int conjugation;
+            int conjugation = 0;
 
         switch (tense)
         {
@@ -134,7 +133,7 @@ public class Subject : Translatable
                 break;
         }
 
-        Verb verb = new Verb();
+        Verb verb = new Verb(tense, conjugation);
         return verb;
     }
 }

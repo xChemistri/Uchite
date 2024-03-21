@@ -20,6 +20,7 @@ public class Verb : Translatable
 
     public Verb ()
     {
+        tense = -1;
         string[] list = File.ReadLines("Assets\\Dictionary\\VerbMasterList").ToArray();
         System.Random gen = new System.Random();
 

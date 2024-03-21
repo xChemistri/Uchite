@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Statement 
 {
-    private readonly int CHOICES = 2;
+    private readonly int CHOICES = 3;
     private Translatable[] sentence;
 
 
@@ -23,6 +23,10 @@ public class Statement
             case 2:
                 sentence = new Translatable[1];
                 sentence[0] = new Subject();
+                break;
+            case 3:
+                sentence = new Translatable[1];
+                sentence[0] = new Number();
                 break;
         }
     }
