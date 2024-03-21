@@ -25,7 +25,7 @@ public class GameController : MonoBehaviour
     {
         if (statement.Verify(input.text) == 0)
         {
-            Debug.Log("TRUE: " + input.text + ", " + statement.RuStr());
+            Debug.Log("TRUE: " + input.text);
 
             streak++;
 

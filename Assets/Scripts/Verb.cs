@@ -6,15 +6,16 @@ using System.Linq;
 
 public class Verb : Translatable
 {
-    public VerbEntry word;
+    private VerbEntry word;
 
-    public bool infinitive = true;
-    public int tense = 1;
-    public int conjugation = 0;
+    private int tense = 1;
+    private int conjugation = 0;
 
-    public Verb (string word)
+    public Verb (string word, int tense, int conjugation)
     {
         this.word = VerbEntry.Grab(word);
+        this.tense = tense;
+        this.conjugation = conjugation;
     }
 
     public Verb ()
@@ -22,8 +23,17 @@ public class Verb : Translatable
         string[] list = File.ReadLines("Assets\\Dictionary\\VerbMasterList").ToArray();
         System.Random gen = new System.Random();
 
-        infinitive = false;
         word = VerbEntry.Grab(list[gen.Next(list.Length)]);
+    }
+
+    public Verb (int tense, int conjugation)
+    {
+        string[] list = File.ReadLines("Assets\\Dictionary\\VerbMasterList").ToArray();
+        System.Random gen = new System.Random();
+        word = VerbEntry.Grab(list[gen.Next(list.Length)]);
+
+        this.tense = tense;
+        this.conjugation = conjugation;
     }
 
     public Subject RandomDirObj ()
@@ -34,10 +44,11 @@ public class Verb : Translatable
         System.Random gen = new System.Random();
 
         Subject ans = new Subject(word.predicted_subjects[gen.Next(word.predicted_subjects.Length)]);
-        ans.SetDeclension(word.subDeclension);
+        ans.Declension = word.subDeclension;
 
         return ans;
     }
+
     public string RuStr ()
     {
         return word.GetAs(tense, conjugation);
@@ -45,10 +56,12 @@ public class Verb : Translatable
 
     public string EnStr ()
     {
-        if (infinitive) return word.Translate(0);
+        if (tense == -1) return word.Translate(0);
 
         switch (tense)
         {
+            case -1:
+                return word.Translate(0);
             case 0:
             default:
                 return word.Translate(1);

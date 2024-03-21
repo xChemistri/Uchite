@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Statement 
 {
-    private readonly int CHOICES = 1;
+    private readonly int CHOICES = 2;
     private Translatable[] sentence;
 
 
@@ -16,12 +16,21 @@ public class Statement
         {
             default:
             case 1:
-                sentence = new Translatable[4];
+                sentence = new Translatable[3];
                 sentence[0] = new Subject();
-                sentence[1] = sentence[0].Next();
-                sentence[2] = sentence[1].Next();
+                Create();
+                break;
+            case 2:
+                sentence = new Translatable[1];
+                sentence[0] = new Subject();
                 break;
         }
+    }
+
+    private void Create ()
+    {
+        for (int i = 1; i < sentence.Length; i++)
+            sentence[i] = sentence[i-1].Next();
     }
 
     public string EnStr ()

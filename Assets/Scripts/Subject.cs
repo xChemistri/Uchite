@@ -7,31 +7,26 @@ using System.Linq;
 public class Subject : Translatable
 {
     private int declension = 0;
+    public int Declension
+    {
+        set { declension = value; }
+        get { return declension; }
+    }
+
     private int gender = 0;
+    public int Gender
+    {
+        get { return gender; }
+    }
+
     private bool plural = false;
+    public bool Plural
+    {
+        get { return plural; }
+    }
 
     private Adjective[] adjectives;
     private SubjectEntry word = null;
-
-    public int GetDeclension ()
-    {
-        return declension;
-    }
-
-    public void SetDeclension (int declension)
-    {
-        this.declension = declension;
-    }
-
-    public int GetGender ()
-    {
-        return gender;
-    }
-
-    public bool IsPlural ()
-    {
-        return plural;
-    }
 
     public Subject (string word)
     {
@@ -98,35 +93,48 @@ public class Subject : Translatable
 
     public Translatable Next()
     {
-        Verb verb = new Verb();
+        System.Random gen = new System.Random();
+            int tense = gen.Next(3);
+            int conjugation;
 
-        switch (word.GetAs(plural ? 1 : 0, declension))
+        switch (tense)
         {
-            case "я":
-                verb.conjugation = 0;
-                break;
-            case "ты":
-                verb.conjugation = 1;
-                break;
-            case "он":
-            case "она":
-            case "оно":
-                verb.conjugation = 2;
-                break;
-            case "мы":
-                verb.conjugation = 3;
-                break;
-            case "вы":
-                verb.conjugation = 4;
-                break;
-            case "они":
-                verb.conjugation = 5;
+            case 0:
+                conjugation = plural ? 3 : gender;
                 break;
             default:
-                verb.conjugation = plural ? 5 : 2;
+            case 1:
+            case 2:
+                switch (word.GetAs(plural ? 1 : 0, declension))
+                {
+                    case "я":
+                        conjugation = 0;
+                        break;
+                    case "ты":
+                        conjugation = 1;
+                        break;
+                    case "он":
+                    case "она":
+                    case "оно":
+                        conjugation = 2;
+                        break;
+                    case "мы":
+                        conjugation = 3;
+                        break;
+                    case "вы":
+                        conjugation = 4;
+                        break;
+                    case "они":
+                        conjugation = 5;
+                        break;
+                    default:
+                        conjugation = plural ? 5 : 2;
+                        break;
+                }
                 break;
         }
 
+        Verb verb = new Verb();
         return verb;
     }
 }

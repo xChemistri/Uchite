@@ -75,7 +75,19 @@ public class VerbEntry
             default:
                 return present[subject];
             case 2:
-                return future[subject];
+                if (imperfective)
+                    switch (subject)
+                    {
+                        default:
+                        case 0: return "буду " + infinitive;
+                        case 1: return "будешь " + infinitive;
+                        case 2: return "будет " + infinitive;
+                        case 3: return "будем " + infinitive;
+                        case 4: return "будете " + infinitive;
+                        case 5: return "будут " + infinitive;
+                    }
+                else
+                    return future[subject];
         }
     }
 }
