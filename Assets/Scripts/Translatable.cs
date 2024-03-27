@@ -6,4 +6,6 @@ public interface Translatable
 	
 	public bool CaseGroup ();
 	public string WhatCaseGroup ();
+//	public bool Belongs (string word);
+//	public string GetType (string word);
 }

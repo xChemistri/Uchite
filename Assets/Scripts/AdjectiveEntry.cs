@@ -24,32 +24,11 @@ public class AdjectiveEntry
         string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");
         return JsonUtility.FromJson<AdjectiveEntry>(data);
     }
-
-    public void CreateEntry (string stem, string translation)
-    {
-        this.translation = translation;
-        isIrregular = false;
-
-        nominative = new[] {stem+"ый", stem+"ая", stem+"ое", stem+"ые"};
-        genitive = new[] {stem+"ого", stem+"ой", stem+"ого", stem+"ых"};
-        dative = new[] {stem+"ому", stem+"ой", stem+"ому", stem+"ым"};
-        accusative_anim = new[] {stem+"ого", stem+"ую", stem+"ого", stem+"ых"};
-        accusative_inam = new[] {stem+"ый", stem+"ую", stem+"ое", stem+"ые"};
-        instrumental = new[] {stem+"ым", stem+"ой", stem+"ым", stem+"ыми"};
-        prepositional = new[] {stem+"ом", stem+"ой", stem+"ом", stem+"ых"};
-        shortform = new[] {stem, stem+"о", stem+"а", stem+"ы"};
-
-        string data = JsonUtility.ToJson(this, true);
-        File.WriteAllText("Assets\\Dictionary\\" + nominative[0] + ".json", data);
-
-        Debug.Log("Written");
-    }
-
+    
     public string Translate ()
     {
         return translation;
     }
-
     public string GetAs(int gender, int declination)
     {
         switch (declination)

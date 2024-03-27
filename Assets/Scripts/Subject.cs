@@ -49,12 +49,8 @@ public class Subject : Translatable
         if (this.word.possible_adjectives != null)
         {
             this.adjectives = new Adjective[1];
-
             for (int i = 0; i < this.adjectives.Length; i++)
-            {
-                this.adjectives[i] = Adjective.RandomFromList(this.word.possible_adjectives);
-                this.adjectives[i].gender = (this.plural ? 3 : this.word.gender);
-            }
+                this.adjectives[i] = new Adjective(this.word.possible_adjectives, (this.plural ? 3 : this.word.gender), this.declension);
         }
     }
     public string RuStr ()

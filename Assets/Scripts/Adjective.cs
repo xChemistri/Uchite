@@ -6,40 +6,44 @@ using System.IO;
 
 public class Adjective : Translatable
 {
-    public int gender = 0;
-    public int declension = 0;
-    public AdjectiveEntry word = null;
+    private int gender = 0;
+    private int declension = 0;
+    private AdjectiveEntry word = null;
 
-    public static Adjective Activate (string word)
+    public Adjective (string word)
     {
-        Adjective adj = new Adjective();
-        adj.word = AdjectiveEntry.Grab(word);
-        return adj;
+        this.word = AdjectiveEntry.Grab(word);
     }
 
-    public static Adjective Random ()
+    public Adjective (string word, int gender, int declension)
+    {
+        this.word = AdjectiveEntry.Grab(word);
+        this.gender = gender;
+        this.declension = declension;
+    }
+
+    public Adjective ()
     {
         string[] list = File.ReadLines("Assets\\Dictionary\\AdjectiveMasterList").ToArray();
         System.Random gen = new System.Random();
-
-        Adjective adj = new Adjective();
-        adj.word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
-        
-        return adj;
+        word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
     }
 
-    public static Adjective RandomFromList (string[] list)
+    public Adjective (string[] list)
     {
         System.Random gen = new System.Random();
-
         if (list.Length != 0)
-        {
-            Adjective adj = new Adjective();
-            adj.word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
-            return adj;
-        }
+            word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
+    }
 
-        return null;
+    public Adjective (string[] list, int gender, int declension)
+    {
+        System.Random gen = new System.Random();
+        if (list.Length != 0)
+            word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
+
+        this.gender = gender;
+        this.declension = declension;
     }
 
     public string RuStr ()
@@ -56,4 +60,5 @@ public class Adjective : Translatable
     {
         return null;
     }
+
 }
