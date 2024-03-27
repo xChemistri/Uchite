@@ -24,7 +24,7 @@ public class AdjectiveEntry
         string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");
         return JsonUtility.FromJson<AdjectiveEntry>(data);
     }
-    
+
     public string Translate ()
     {
         return translation;

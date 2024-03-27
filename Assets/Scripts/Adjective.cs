@@ -61,4 +61,77 @@ public class Adjective : Translatable
         return null;
     }
 
+	public bool IsForm (string thing)
+	{
+		for (int i = 0; i < 6; i++)
+			for (int j = 0; j < 4; j++)
+				 if (thing.Contains(this.word.GetAs(j, i)))
+				 	return true;
+
+		return false;
+	}
+
+	public string IsFormDetailed (string thing)
+	{
+		if (FormGender(thing) == -1 && FormDeclension(thing) == -1)
+		{
+			return "Sentence entered contains a typo.";
+		}
+		else if (FormGender(thing) == gender)
+		{
+			switch (declension)
+			{
+				default:
+				case 0:
+					return "Missing adjective in the nominative.";
+				case 1:
+					return "Missing adjective in the genitive.";
+				case 2:
+					return "Missing adjective in the dative.";
+				case 3:
+				case 4:
+					return "Missing adjective in the accusative.";
+				case 5:
+					return "Missing adjective in the instrumental.";
+				case 6:
+					return "Missing adjective in the prepositional.";
+				case 7:
+					return "Short form missing.";
+			}
+		}
+		else // FormDeclension(thing) == declension
+		{
+			switch (gender)
+			{
+				default:
+				case 0:
+					return "Subject is a masculine noun.";
+				case 1:
+					return "Subject is a feminine noun.";
+				case 2:
+					return "Subject is a neuter noun.";
+				case 3:
+					return "Subject is plural.";
+			}
+		}
+	}
+	private int FormGender (string thing)
+	{
+		for (int i = 0; i < 6; i++)
+    			for (int j = 0; j < 4; j++)
+    				 if (thing.Contains(this.word.GetAs(j, i)))
+    				 	return j;
+
+    	return -1;
+	}
+
+	private int FormDeclension (string thing)
+    {
+    	for (int i = 0; i < 6; i++)
+        	for (int j = 0; j < 4; j++)
+        		if (thing.Contains(this.word.GetAs(j, i)))
+        			return i;
+
+        return -1;
+    }
 }

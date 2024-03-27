@@ -16,6 +16,18 @@ public class Number : Translatable
         return null;
     }
 
+	public bool IsForm (string thing)
+	{
+		return thing.Contains(RuStr());
+	}
+
+	public string IsFormDetailed (string thing)
+	{
+		if (!IsForm(thing))
+			return "Incorrect number.";
+		else
+			return "Correct.";
+	}
     public string RuStr ()
     {
         string translation = "";

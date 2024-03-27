@@ -4,8 +4,6 @@ public interface Translatable
 	public string EnStr ();
 	public Translatable Next ();
 	
-	public bool CaseGroup ();
-	public string WhatCaseGroup ();
-//	public bool Belongs (string word);
-//	public string GetType (string word);
+	public bool IsForm (string word);
+	public string IsFormDetailed (string word);
 }

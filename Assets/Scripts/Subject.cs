@@ -85,6 +85,73 @@ public class Subject : Translatable
             plural = false;
     }
 
+	public bool IsForm (string thing)
+    {
+    	for (int i = 0; i < 6; i++)
+    		for (int j = 0; j < 2; j++)
+    			if (thing.Contains(this.word.GetAs(j, i)))
+    			 	return true;
+
+    	return false;
+    }
+
+    	public string IsFormDetailed (string thing)
+    	{
+    		if (FormPlural(thing) == -1 && FormDeclension(thing) == -1)
+    		{
+    			return "Sentence entered contains a typo.";
+    		}
+    		else if (FormPlural(thing) == (plural ? 1 : 0))
+    		{
+    			switch (declension)
+    			{
+    				default:
+    				case 0:
+    					return "Missing adjective in the nominative.";
+    				case 1:
+    					return "Missing adjective in the genitive.";
+    				case 2:
+    					return "Missing adjective in the dative.";
+    				case 3:
+    					return "Missing adjective in the accusative.";
+    				case 4:
+    					return "Missing adjective in the instrumental.";
+    				case 5:
+    					return "Missing adjective in the prepositional.";
+    			}
+    		}
+    		else // FormDeclension(thing) == declension
+    		{
+    			switch (plural)
+    			{
+    				default:
+    				case false:
+    					return "Subject should be in the singular form.";
+    				case true:
+    					return "Subject should be in the plural form.";
+    			}
+    		}
+    	}
+    	private int FormPlural (string thing)
+    	{
+    		for (int i = 0; i < 6; i++)
+        			for (int j = 0; j < 2; j++)
+        				 if (thing.Contains(this.word.GetAs(j, i)))
+        				 	return j;
+
+        	return -1;
+    	}
+
+    	private int FormDeclension (string thing)
+        {
+        	for (int i = 0; i < 6; i++)
+            	for (int j = 0; j < 2; j++)
+            		if (thing.Contains(this.word.GetAs(j, i)))
+            			return i;
+
+            return -1;
+        }
+
     // Markovian Sequences
     public Translatable Next()
     {
