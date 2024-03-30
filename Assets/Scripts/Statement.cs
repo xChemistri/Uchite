@@ -50,11 +50,18 @@ public class Statement
         return translation.Substring(0, translation.Length-1);
     }
 
-    public int Verify (string line)
+    public string Verify (string line)
     {
         if (line.ToLower().Contains(RuStr().ToLower()))
-            return 0;
-        return 1;
+            return "";
+        else
+			foreach (Translatable word in sentence)
+			{
+				if (!line.Contains(word.RuStr()))
+						return word.IsFormDetailed(line);
+			};
+
+		return "Something went wrong.";
     }
 
     public string RuStr ()

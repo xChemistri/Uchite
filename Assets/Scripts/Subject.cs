@@ -99,7 +99,8 @@ public class Subject : Translatable
     	{
     		if (FormPlural(thing) == -1 && FormDeclension(thing) == -1)
     		{
-    			return "Sentence entered contains a typo.";
+    			return "Sentence entered contains a typo."
+    			+ "\n Correct word: " + RuStr();
     		}
     		else if (FormPlural(thing) == (plural ? 1 : 0))
     		{
@@ -107,17 +108,23 @@ public class Subject : Translatable
     			{
     				default:
     				case 0:
-    					return "Missing adjective in the nominative.";
+    					return "Nominative cases are used when the object is the subject (What?)."
+    					+ "\n Missing nominative: " + RuStr();
     				case 1:
-    					return "Missing adjective in the genitive.";
+    					return "Genitive cases are used in terms of possession (Whose?)."
+    					+ "\n Missing genitive: " + RuStr();
     				case 2:
-    					return "Missing adjective in the dative.";
+    					return "Dative cases are used to refer to indirect objects (To whom/what?)."
+    					+ "\n Missing dative: " + RuStr();;
     				case 3:
-    					return "Missing adjective in the accusative.";
+    					return "Accusative cases are used to refer to the object of a sentence."
+    					+ "\n Missing accusative: " + RuStr();;
     				case 4:
-    					return "Missing adjective in the instrumental.";
+    					return "Instrumental cases are used to discuss how something is done (With what?)."
+    					+ "\n Missing instrumental: " + RuStr();
     				case 5:
-    					return "Missing adjective in the prepositional.";
+    					return "Prepositional cases are used to denote the location (Where?)."
+    					+ "\n Missing prepositional: " + RuStr();
     			}
     		}
     		else // FormDeclension(thing) == declension
@@ -126,9 +133,11 @@ public class Subject : Translatable
     			{
     				default:
     				case false:
-    					return "Subject should be in the singular form.";
+    					return "There is only one subject in this sentence."
+    					+ "\n Missing singular: " + RuStr();
     				case true:
-    					return "Subject should be in the plural form.";
+    					return "There is multiple subjects in this sentence."
+    					+ "\n Missing plural: " + RuStr();
     			}
     		}
     	}

@@ -5,8 +5,9 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField] int streak = 0;
-    [SerializeField] Statement statement;
+    private int streak = 0;
+    private bool answered = false;
+    private Statement statement;
 
     [SerializeField] TMPro.TMP_Text text;
     [SerializeField] TMP_InputField input;
@@ -23,29 +24,35 @@ public class GameController : MonoBehaviour
 
     public void Submit ()
     {
-        if (statement.Verify(input.text) == 0)
-        {
-            Debug.Log("TRUE: " + input.text);
-
-            streak++;
-
-            streakcnt.text = "" + streak;
-            statement = new Statement();
-            text.text = statement.EnStr();
-            input.text = null;
-
-            
+    	if (!answered)
+    	{
+			if (statement.Verify(input.text).Equals(""))
+			{
+				Debug.Log("TRUE: " + input.text);
+				streak++;
+				New();
+			}
+			else
+			{
+				Debug.Log("FALSE: " + input.text + ", NOT " + statement.RuStr());
+				streak = 0;
+				text.text = statement.Verify(input.text);
+				input.text = null;
+				answered = true;
+			}
         }
         else
         {
-            Debug.Log("FALSE: " + input.text + ", NOT " + statement.RuStr());
-
-            streak = 0;
-
-            streakcnt.text = "" + streak;
-            statement = new Statement();
-            text.text = statement.EnStr();
-            input.text = null;
+        	New();
+        	answered = false;
         }
+    }
+
+    public void New ()
+    {
+    	streakcnt.text = "" + streak;
+        statement = new Statement();
+        text.text = statement.EnStr();
+        input.text = null;
     }
 }
