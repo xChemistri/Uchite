@@ -19,6 +19,9 @@ public class AdjectiveEntry
     public string[] prepositional;      //Int 6
     public string[] shortform;          //Int 7
 
+	public string[] predicted;
+
+
     public static AdjectiveEntry Grab (string word)
     {
         string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");

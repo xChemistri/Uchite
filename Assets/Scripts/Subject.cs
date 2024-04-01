@@ -25,13 +25,11 @@ public class Subject : Translatable
         get { return plural; }
     }
 
-    private Adjective[] adjectives;
     private SubjectEntry word = null;
 
     public Subject (string word)
     {
         this.word = SubjectEntry.Grab(word);
-        this.adjectives = new Adjective[0];
         this.gender = this.word.gender;
     }
 
@@ -43,40 +41,22 @@ public class Subject : Translatable
         this.plural = (gen.Next(2) == 1)? true: false;
         this.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
         this.ExceptionCheck();
-        
-        this.adjectives = new Adjective[0];
+    }
 
-        if (this.word.possible_adjectives != null)
+     public Subject (string[] list)
         {
-            this.adjectives = new Adjective[1];
-            for (int i = 0; i < this.adjectives.Length; i++)
-                this.adjectives[i] = new Adjective(this.word.possible_adjectives, (this.plural ? 3 : this.word.gender), this.declension);
+            System.Random gen = new System.Random();
+
+            this.plural = (gen.Next(2) == 1)? true: false;
+            this.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
+            this.ExceptionCheck();
         }
-    }
+
     public string RuStr ()
-    {
-        string str = "";
-
-        if (adjectives.Length == 0)
-            return word.GetAs(plural ? 1 : 0, declension);
-
-
-        foreach (Adjective a in adjectives)
-            str += a.RuStr() + " ";
-        return (str + word.GetAs(plural ? 1 : 0, declension));
-    }
+    { return word.GetAs(plural ? 1 : 0, declension); }
 
     public string EnStr ()
-    {
-        string str = "";
-
-        foreach (Adjective a in adjectives)
-        {
-            str += a.EnStr() + " ";
-        }
-        
-        return (str + (plural ? word.plural : word.translation));
-    }
+    { return (plural ? word.plural : word.translation); }
 
     private void ExceptionCheck ()
     // Used for irregular cases of verbs (ex. no plurals).
@@ -165,8 +145,8 @@ public class Subject : Translatable
     public Translatable Next()
     {
         System.Random gen = new System.Random();
-            int tense = gen.Next(3);
-            int conjugation = 0;
+        int tense = gen.Next(3);
+        int conjugation = 0;
 
         switch (tense)
         {
@@ -205,7 +185,14 @@ public class Subject : Translatable
                 break;
         }
 
-        Verb verb = new Verb(tense, conjugation);
+        Verb verb = new Verb(word.predicted, tense, conjugation);
         return verb;
     }
+
+    public bool HasNext ()
+        {
+        	if (word.predicted == null) return false;
+        	if (word.predicted.Length == 0) return false;
+        	return true;
+        }
 }

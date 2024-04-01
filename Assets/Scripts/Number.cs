@@ -111,4 +111,7 @@ public class Number : Translatable
                     return translation;
             }
     }
+
+    public bool HasNext ()
+        { return false; }
 }

@@ -58,7 +58,9 @@ public class Adjective : Translatable
 
     public Translatable Next ()
     {
-        return null;
+    	Subject sub = new Subject(word.predicted);
+    	gender = (sub.Plural ? 3 : sub.Gender);
+    	return sub;
     }
 
 	public bool IsForm (string thing)
@@ -76,7 +78,7 @@ public class Adjective : Translatable
 		if (FormGender(thing) == -1 && FormDeclension(thing) == -1)
 		{
 			return "Sentence entered contains a typo."
-			+ "\n Correct word: " + RuStr();
+			+ "\nCorrect word: " + RuStr();
 		}
 		else if (FormGender(thing) == gender)
 		{
@@ -85,26 +87,26 @@ public class Adjective : Translatable
 				default:
 					case 0:
                 		return "Nominative cases are used when the object is the subject (What?)."
-						+ "\n Missing nominative adjective: " + RuStr();
+						+ "\nMissing nominative adjective: " + RuStr();
 					case 1:
                     	return "Genitive cases are used in terms of possession (Whose?)."
-                    	+ "\n Missing genitive adjective: " + RuStr();
+                    	+ "\nMissing genitive adjective: " + RuStr();
                     case 2:
                     return "Dative cases are used to refer to indirect objects (To whom/what?)."
-                    	+ "\n Missing dative adjective: " + RuStr();
+                    	+ "\nMissing dative adjective: " + RuStr();
                     case 3:
                     case 4:
                     	return "Accusative cases are used to refer to the object of a sentence."
-                    	+ "\n Missing accusative adjective: " + RuStr();
+                    	+ "\nMissing accusative adjective: " + RuStr();
                     case 5:
                     	return "Instrumental cases are used to discuss how something is done (With what?)."
-                    	+ "\n Missing instrumental adjective: " + RuStr();
+                    	+ "\nMissing instrumental adjective: " + RuStr();
                     case 6:
                     	return "Prepositional cases are used to denote the location (Where?)."
-                    	+ "\n Missing prepositional adjective: " + RuStr();
+                    	+ "\nMissing prepositional adjective: " + RuStr();
                     case 7:
                     	return "Short forms are used when an attribute is temporary."
-                    	+ "\n Missing short form: " + RuStr();
+                    	+ "\nMissing short form: " + RuStr();
 			}
 		}
 		else // FormDeclension(thing) == declension
@@ -114,16 +116,16 @@ public class Adjective : Translatable
 				default:
 				case 0:
 					return "Adjective gender always matches subject gender. Subject is masculine."
-					+ "Expected masculine adjective: " + RuStr();
+					+ "\nExpected masculine adjective: " + RuStr();
 				case 1:
 					return "Adjective gender always matches subject gender. Subject is feminine."
-					+ "Expected feminine adjective: " + RuStr();
+					+ "\nExpected feminine adjective: " + RuStr();
 				case 2:
 					return "Adjective gender always matches subject gender. Subject is neuter."
-					+ "Expected neuter adjective: " + RuStr();
+					+ "\nExpected neuter adjective: " + RuStr();
 				case 3:
 					return "Adjective plurality matches subject plurality, regardless of gender."
-					+ "Expected plural adjective: " + RuStr();
+					+ "\nExpected plural adjective: " + RuStr();
 			}
 		}
 	}
@@ -145,5 +147,12 @@ public class Adjective : Translatable
         			return i;
 
         return -1;
+    }
+
+    public bool HasNext ()
+    {
+    	if (word.predicted == null) return false;
+    	if (word.predicted.Length == 0) return false;
+    	return true;
     }
 }

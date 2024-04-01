@@ -22,8 +22,7 @@ public class SubjectEntry
     public string[] instrumental;       // Case 4
     public string[] prepositional;      // Case 5
 
-    public string[] possible_adjectives;
-    public string[] possible_verbs;
+    public string[] predicted;
 
     public static SubjectEntry Grab (string word)
     {

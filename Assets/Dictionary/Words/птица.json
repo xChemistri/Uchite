@@ -12,6 +12,5 @@
     "instrumental"      : ["птицей", "птицами"],
     "prepositional"     : ["птице", "птицах"],
 
-    "possible_adjectives": ["красный", "оранжевый", "бирюзовый"],
-    "possible_verbs": ["пить"]
+    "predicted": ["пить"]
 }

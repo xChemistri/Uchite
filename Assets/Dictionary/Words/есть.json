@@ -11,6 +11,6 @@
     "present": ["ем", "ешь", "ест", "едим" ,"едите", "едят"],
     "future": [],
 
-    "predicted_subjects": ["хлеб", "пицца"],
+    "predicted": ["хлеб", "пицца"],
     "subDeclension": 3
 }

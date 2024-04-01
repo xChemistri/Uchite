@@ -18,6 +18,15 @@ public class Verb : Translatable
         this.conjugation = conjugation;
     }
 
+	public Verb (string[] list, int tense, int conjugation)
+        {
+            System.Random gen = new System.Random();
+
+            word = VerbEntry.Grab(list[gen.Next(list.Length)]);
+            this.tense = tense;
+            this.conjugation = conjugation;
+        }
+
     public Verb ()
     {
         tense = -1;
@@ -39,12 +48,12 @@ public class Verb : Translatable
 
     public Subject RandomDirObj ()
     {
-        if (word.predicted_subjects == null)
+        if (word.predicted == null)
             return null;
 
         System.Random gen = new System.Random();
 
-        Subject ans = new Subject(word.predicted_subjects[gen.Next(word.predicted_subjects.Length)]);
+        Subject ans = new Subject(word.predicted[gen.Next(word.predicted.Length)]);
         ans.Declension = word.subDeclension;
 
         return ans;
@@ -192,4 +201,11 @@ public class Verb : Translatable
     {
         return RandomDirObj();
     }
+
+    public bool HasNext ()
+        {
+        	if (word.predicted == null) return false;
+        	if (word.predicted.Length == 0) return false;
+        	return true;
+        }
 }
