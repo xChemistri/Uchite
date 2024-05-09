@@ -11,6 +11,11 @@ public class Verb : Translatable
     private int tense = 1;
     private int conjugation = 0;
 
+    public Verb (string word)
+    {
+        this.word = VerbEntry.Grab(word);
+    }
+
     public Verb (string word, int tense, int conjugation)
     {
         this.word = VerbEntry.Grab(word);
@@ -82,6 +87,11 @@ public class Verb : Translatable
                 return word.Translate(4);
         }
     }
+
+    public bool Valid ()
+	{
+		return word != null;
+	}
 
 	public bool IsForm (string thing)
     {

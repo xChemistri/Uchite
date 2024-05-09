@@ -26,7 +26,10 @@ public class SubjectEntry
 
     public static SubjectEntry Grab (string word)
     {
-        string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");
+        if (!File.Exists("Assets\\Dictionary\\Subject\\" + word + ".json"))
+            return null;
+
+        string data = File.ReadAllText("Assets\\Dictionary\\Subject\\" + word + ".json");
         return JsonUtility.FromJson<SubjectEntry>(data);
     }
 

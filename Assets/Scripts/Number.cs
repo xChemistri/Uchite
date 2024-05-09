@@ -16,6 +16,11 @@ public class Number : Translatable
         return null;
     }
 
+    public bool Valid ()
+	{
+		return true;
+	}
+
 	public bool IsForm (string thing)
 	{
 		return thing.Contains(RuStr());

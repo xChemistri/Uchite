@@ -29,6 +29,9 @@ public class Subject : Translatable
 
     public Subject (string word)
     {
+        if (!File.Exists("Assets\\Dictionary\\Subject\\" + word + ".json"))
+            return;
+        
         this.word = SubjectEntry.Grab(word);
         this.gender = this.word.gender;
     }
@@ -64,6 +67,11 @@ public class Subject : Translatable
         if (word.GetAs(0, 0) == "молоко")
             plural = false;
     }
+
+    public bool Valid ()
+	{
+		return word != null;
+	}
 
 	public bool IsForm (string thing)
     {

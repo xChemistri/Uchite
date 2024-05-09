@@ -12,14 +12,23 @@ public class GameController : MonoBehaviour
     [SerializeField] TMPro.TMP_Text text;
     [SerializeField] TMP_InputField input;
     [SerializeField] TMP_Text streakcnt;
+    [SerializeField] CheckButtonScript checker;
 
     // Start is called before the first frame update
-    void Start ()
+    void NewGame ()
     {
         Statement st = new Statement();
         streakcnt.text = "" + streak;
         statement = new Statement();
         text.text = statement.EnStr();
+    }
+
+    void Start ()
+    {
+        if (GameObject.FindWithTag("GameController") != null)
+            Destroy(this);
+
+        DontDestroyOnLoad(this);
     }
 
     public void Submit ()
@@ -29,12 +38,16 @@ public class GameController : MonoBehaviour
 			if (statement.Verify(input.text).Equals(""))
 			{
 				Debug.Log("TRUE: " + input.text);
+                checker.setColor(2);
+                checker.press();
+                answered = true;
 				streak++;
-				New();
 			}
 			else
 			{
 				Debug.Log("FALSE: " + input.text + ", NOT " + statement.RuStr());
+                checker.setColor(0);
+                checker.press();
 				streak = 0;
 				text.text = statement.Verify(input.text);
 				input.text = null;
@@ -43,6 +56,8 @@ public class GameController : MonoBehaviour
         }
         else
         {
+            checker.setColor(1);
+            checker.depress();
         	New();
         	answered = false;
         }

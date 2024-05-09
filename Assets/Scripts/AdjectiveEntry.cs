@@ -24,7 +24,10 @@ public class AdjectiveEntry
 
     public static AdjectiveEntry Grab (string word)
     {
-        string data = File.ReadAllText("Assets\\Dictionary\\Words\\" + word + ".json");
+        if (!File.Exists("Assets\\Dictionary\\Adjective\\" + word + ".json"))
+            return null;
+
+        string data = File.ReadAllText("Assets\\Dictionary\\Adjective\\" + word + ".json");
         return JsonUtility.FromJson<AdjectiveEntry>(data);
     }
 

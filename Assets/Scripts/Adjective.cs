@@ -10,11 +10,10 @@ public class Adjective : Translatable
     private int declension = 0;
     private AdjectiveEntry word = null;
 
-    public Adjective (string word)
-    {
-        this.word = AdjectiveEntry.Grab(word);
-    }
-
+	public Adjective (string word)
+	{
+		this.word = AdjectiveEntry.Grab(word);
+	}
     public Adjective (string word, int gender, int declension)
     {
         this.word = AdjectiveEntry.Grab(word);
@@ -55,6 +54,11 @@ public class Adjective : Translatable
     {
         return word.Translate();
     }
+
+	public bool Valid ()
+	{
+		return word != null;
+	}
 
     public Translatable Next ()
     {
