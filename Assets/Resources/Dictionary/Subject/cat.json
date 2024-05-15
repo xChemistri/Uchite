@@ -1,0 +1,16 @@
+{
+    "isIrregular" : false,
+    "translation" : "cat",
+    "plural": "cats",
+    "gender" : 0,
+    "animate": 1,
+
+    "nominative"        : ["кот", "коты"],
+    "genitive"          : ["кота", "котов"],
+    "dative"            : ["коту", "котам"],
+    "accusative"        : ["кота", "котов"],
+    "instrumental"      : ["котом", "котами"],
+    "prepositional"     : ["коте", "котах"],
+
+    "predicted": ["eat ", "drink ", "sleep "]
+}

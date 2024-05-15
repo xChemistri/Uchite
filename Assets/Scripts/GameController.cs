@@ -5,30 +5,60 @@ using TMPro;
 
 public class GameController : MonoBehaviour
 {
-    private int streak = 0;
     private bool answered = false;
     private Statement statement;
+    private StreakCounter counter;
+    private int moving = 0;
 
     [SerializeField] TMPro.TMP_Text text;
     [SerializeField] TMP_InputField input;
-    [SerializeField] TMP_Text streakcnt;
     [SerializeField] CheckButtonScript checker;
 
-    // Start is called before the first frame update
-    void NewGame ()
-    {
-        Statement st = new Statement();
-        streakcnt.text = "" + streak;
-        statement = new Statement();
-        text.text = statement.EnStr();
-    }
+    [SerializeField] GameObject correct;
+    [SerializeField] GameObject incorrect;
 
+    [SerializeField] CharacterController character;
+    private bool charhide = true;
+
+    private AudioController audioController;
+
+    // Start is called before the first frame update
+    void FixedUpdate ()
+    {
+        switch (moving)
+        {
+            case 0:
+            default:
+                break;
+            case 1:
+                correct.GetComponent<Transform>().localPosition =
+                new Vector3(-1.6689f, correct.GetComponent<Transform>().localPosition.y-75, 0);
+
+                if (correct.GetComponent<Transform>().localPosition.y <= -340.0f)
+                    moving = 0;
+
+                break;
+            case 2:
+                incorrect.GetComponent<Transform>().localPosition =
+                new Vector3(-1.6689f, incorrect.GetComponent<Transform>().localPosition.y-75, 0);
+
+                if (incorrect.GetComponent<Transform>().localPosition.y <= -340.0f)
+                    moving = 0;
+
+                break;
+            case 3:
+                correct.GetComponent<Transform>().localPosition = new Vector3(-1.6689f, 0, 0);
+                incorrect.GetComponent<Transform>().localPosition = new Vector3(-1.6689f, 0, 0);
+                moving = 0;
+                break;
+                
+        }
+    }
     void Start ()
     {
-        if (GameObject.FindWithTag("GameController") != null)
-            Destroy(this);
-
-        DontDestroyOnLoad(this);
+        counter = GameObject.FindWithTag("StreakCounter").GetComponent<StreakCounter>();
+        audioController = this.GetComponent<AudioController>();
+        New();
     }
 
     public void Submit ()
@@ -37,21 +67,28 @@ public class GameController : MonoBehaviour
     	{
 			if (statement.Verify(input.text).Equals(""))
 			{
-				Debug.Log("TRUE: " + input.text);
                 checker.setColor(2);
                 checker.press();
                 answered = true;
-				streak++;
+				counter.Increment();
+
+                correct.GetComponentInChildren<TMPro.TMP_Text>().text = "Nice job!";
+                moving = 1;
+
+                audioController.PlayCorrect();
 			}
 			else
 			{
-				Debug.Log("FALSE: " + input.text + ", NOT " + statement.RuStr());
                 checker.setColor(0);
                 checker.press();
-				streak = 0;
-				text.text = statement.Verify(input.text);
-				input.text = null;
+				counter.Reset();
+				incorrect.GetComponentInChildren<TMPro.TMP_Text>().text = statement.Verify(input.text);
+                moving = 2;
 				answered = true;
+                audioController.PlayIncorrect();
+
+                character.Hide();
+                charhide = true;
 			}
         }
         else
@@ -60,14 +97,20 @@ public class GameController : MonoBehaviour
             checker.depress();
         	New();
         	answered = false;
+            moving = 3;
         }
     }
 
     public void New ()
     {
-    	streakcnt.text = "" + streak;
         statement = new Statement();
-        text.text = statement.EnStr();
+        text.text = statement.EnDisplay();
         input.text = null;
+
+        if (charhide)
+        {
+            character.New();
+            charhide = false;
+        }
     }
 }

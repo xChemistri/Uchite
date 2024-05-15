@@ -26,10 +26,12 @@ public class SubjectEntry
 
     public static SubjectEntry Grab (string word)
     {
-        if (!File.Exists("Assets\\Dictionary\\Subject\\" + word + ".json"))
-            return null;
+        string path = ("Dictionary/Subject/" + word);
+        path = path.Substring(0,path.Length-1);
+        TextAsset ta = Resources.Load<TextAsset>(path);
 
-        string data = File.ReadAllText("Assets\\Dictionary\\Subject\\" + word + ".json");
+        if (ta == null) return null;
+        string data = ta.text;
         return JsonUtility.FromJson<SubjectEntry>(data);
     }
 

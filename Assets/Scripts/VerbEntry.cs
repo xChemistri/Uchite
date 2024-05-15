@@ -28,10 +28,12 @@ public class VerbEntry
 
     public static VerbEntry Grab (string word)
     {
-        if (!File.Exists("Assets\\Dictionary\\Verb\\" + word + ".json"))
-            return null;
+        string path = ("Dictionary/Verb/" + word);
+        path = path.Substring(0,path.Length-1);
+        TextAsset ta = Resources.Load<TextAsset>(path);
 
-        string data = File.ReadAllText("Assets\\Dictionary\\Verb\\" + word + ".json");
+        if (ta == null) return null;
+        string data = ta.text;
         return JsonUtility.FromJson<VerbEntry>(data);
     }
 
@@ -40,7 +42,7 @@ public class VerbEntry
         if (pair == "")
             return null;
 
-        string data = File.ReadAllText("Assets\\Dictionary\\Verb\\" + pair + ".json");
+        string data = Resources.Load<TextAsset>("Dictionary/Verb/" + pair).text;
         return JsonUtility.FromJson<VerbEntry>(pair);
     }
     public string Translate (int mode)

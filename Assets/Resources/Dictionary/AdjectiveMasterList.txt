@@ -1,0 +1,17 @@
+white
+turquoise
+big
+tall
+yellow
+green
+short
+red
+tiny
+purple
+small
+massive
+huge
+orange
+pink
+gray
+black 

@@ -23,7 +23,7 @@ public class Adjective : Translatable
 
     public Adjective ()
     {
-        string[] list = File.ReadLines("Assets\\Dictionary\\AdjectiveMasterList").ToArray();
+        string[] list = Resources.Load<TextAsset>("Dictionary/AdjectiveMasterList").text.Split("\n");
         System.Random gen = new System.Random();
         word = AdjectiveEntry.Grab(list[gen.Next(0, (list.Length - 1))]);
     }
@@ -63,7 +63,7 @@ public class Adjective : Translatable
     public Translatable Next ()
     {
     	Subject sub = new Subject(word.predicted);
-    	gender = (sub.Plural ? 3 : sub.Gender);
+    	this.gender = (sub.Plural ? 3 : sub.Gender);
     	return sub;
     }
 
@@ -81,8 +81,7 @@ public class Adjective : Translatable
 	{
 		if (FormGender(thing) == -1 && FormDeclension(thing) == -1)
 		{
-			return "Sentence entered contains a typo."
-			+ "\nCorrect word: " + RuStr();
+			return RuStr() + "\n\nYou'll get it next time, we promise!";
 		}
 		else if (FormGender(thing) == gender)
 		{
@@ -90,27 +89,20 @@ public class Adjective : Translatable
 			{
 				default:
 					case 0:
-                		return "Nominative cases are used when the object is the subject (What?)."
-						+ "\nMissing nominative adjective: " + RuStr();
+                		return RuStr() + "\n\nNominative cases are used when the object is the subject (What?).";
 					case 1:
-                    	return "Genitive cases are used in terms of possession (Whose?)."
-                    	+ "\nMissing genitive adjective: " + RuStr();
+                    	return RuStr() + "\n\nGenitive cases are used in terms of possession (Whose?).";
                     case 2:
-                    return "Dative cases are used to refer to indirect objects (To whom/what?)."
-                    	+ "\nMissing dative adjective: " + RuStr();
+                    return RuStr() + "\n\nDative cases are used to refer to indirect objects (To whom/what?).";
                     case 3:
                     case 4:
-                    	return "Accusative cases are used to refer to the object of a sentence."
-                    	+ "\nMissing accusative adjective: " + RuStr();
+                    	return RuStr() + "\n\nAccusative cases are used to refer to the object of a sentence.";
                     case 5:
-                    	return "Instrumental cases are used to discuss how something is done (With what?)."
-                    	+ "\nMissing instrumental adjective: " + RuStr();
+                    	return RuStr() + "\n\nInstrumental cases are used to discuss how something is done (With what?)..";
                     case 6:
-                    	return "Prepositional cases are used to denote the location (Where?)."
-                    	+ "\nMissing prepositional adjective: " + RuStr();
+                    	return RuStr() + "\n\nPrepositional cases are used to denote the location (Where?).";
                     case 7:
-                    	return "Short forms are used when an attribute is temporary."
-                    	+ "\nMissing short form: " + RuStr();
+                    	return RuStr() + "\n\nShort forms are used when an attribute is temporary.";
 			}
 		}
 		else // FormDeclension(thing) == declension
@@ -119,17 +111,13 @@ public class Adjective : Translatable
 			{
 				default:
 				case 0:
-					return "Adjective gender always matches subject gender. Subject is masculine."
-					+ "\nExpected masculine adjective: " + RuStr();
+					return RuStr() + "\n\nAdjective gender always matches subject gender.\nSubject is masculine.";
 				case 1:
-					return "Adjective gender always matches subject gender. Subject is feminine."
-					+ "\nExpected feminine adjective: " + RuStr();
+					return RuStr() + "\n\nAdjective gender always matches subject gender.\nSubject is feminine.";
 				case 2:
-					return "Adjective gender always matches subject gender. Subject is neuter."
-					+ "\nExpected neuter adjective: " + RuStr();
+					return RuStr() + "\n\nAdjective gender always matches subject gender.\nSubject is neuter.";
 				case 3:
-					return "Adjective plurality matches subject plurality, regardless of gender."
-					+ "\nExpected plural adjective: " + RuStr();
+					return RuStr() + "\n\nAdjective plurality matches subject plurality, regardless of gender.\nThere are multiple subjects.";
 			}
 		}
 	}

@@ -1,0 +1,16 @@
+{
+    "isIrregular" : false,
+    "translation" : "dog",
+    "plural"      : "dogs",
+    "gender" : 1,
+    "animate": 1,
+
+    "nominative"        : ["собака", "собаки"],
+    "genitive"          : ["собаки", "собак"],
+    "dative"            : ["собаке", "собакам"],
+    "accusative"        : ["собаку", "собак"],
+    "instrumental"      : ["собакой", "собаками"],
+    "prepositional"     : ["собаке", "собаках"],
+
+    "predicted": ["drink ", "eat ", "sleep "]
+}

@@ -1,0 +1,16 @@
+{
+    "isIrregular" : false,
+    "translation" : "wolf",
+    "plural"      : "wolves",
+    "gender" : 0,
+    "animate": 1,
+
+    "nominative"        : ["волк", "волки"],
+    "genitive"          : ["волка", "волков"],
+    "dative"            : ["волку", "волкам"],
+    "accusative"        : ["волк", "волков"],
+    "instrumental"      : ["волком", "волками"],
+    "prepositional"     : ["волке", "волках"],
+
+    "predicted": ["drink ", "eat ", "sleep ", "run "]
+}

@@ -1,0 +1,11 @@
+wolf
+lion
+cat
+horse
+frog
+bird
+dog
+i
+you
+he
+she 

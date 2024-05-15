@@ -1,0 +1,16 @@
+{
+    "isIrregular" : false,
+    "translation" : "lion",
+    "plural"      : "lions",
+    "gender" : 0,
+    "animate": 1,
+
+    "nominative"        : ["лев", "львы"],
+    "genitive"          : ["льва", "львов"],
+    "dative"            : ["льву", "львам"],
+    "accusative"        : ["льва", "львов"],
+    "instrumental"      : ["львом", "львами"],
+    "prepositional"     : ["льве", "львах"],
+
+    "predicted": ["drink ", "eat ", "sleep "]
+}

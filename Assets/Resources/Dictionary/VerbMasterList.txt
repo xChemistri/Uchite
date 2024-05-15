@@ -1,0 +1,5 @@
+speak
+drink
+eat
+sleep
+run 

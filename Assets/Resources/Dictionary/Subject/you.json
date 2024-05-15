@@ -1,0 +1,16 @@
+{
+    "isIrregular" : true,
+    "translation" : "you",
+    "plural"      : "you (all)",
+    "gender" : 0,
+    "animate": 1,
+
+    "nominative"        : ["ты", "вы"],
+    "genitive"          : ["тебя", "вас"],
+    "dative"            : ["тебе", "вам"],
+    "accusative"        : ["меня", "вас"],
+    "instrumental"      : ["тебя", "вами"],
+    "prepositional"     : ["тобой", "вас"],
+
+    "predicted": ["drink ", "eat ", "sleep ", "run "]
+}

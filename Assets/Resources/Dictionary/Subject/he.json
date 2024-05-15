@@ -1,0 +1,16 @@
+{
+    "isIrregular" : true,
+    "translation" : "he",
+    "plural"      : "they",
+    "gender" : 0,
+    "animate": 1,
+
+    "nominative"        : ["он", "они"],
+    "genitive"          : ["его", "их"],
+    "dative"            : ["ему", "им"],
+    "accusative"        : ["его", "их"],
+    "instrumental"      : ["им", "ими"],
+    "prepositional"     : ["нём", "них"],
+
+    "predicted": ["drink ", "eat ", "sleep ", "run "]
+}

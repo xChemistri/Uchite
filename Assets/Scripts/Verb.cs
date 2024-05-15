@@ -35,7 +35,7 @@ public class Verb : Translatable
     public Verb ()
     {
         tense = -1;
-        string[] list = File.ReadLines("Assets\\Dictionary\\VerbMasterList").ToArray();
+        string[] list = Resources.Load<TextAsset>("Dictionary/VerbMasterList").text.Split("\n");
         System.Random gen = new System.Random();
 
         word = VerbEntry.Grab(list[gen.Next(list.Length)]);
@@ -43,7 +43,7 @@ public class Verb : Translatable
 
     public Verb (int tense, int conjugation)
     {
-        string[] list = File.ReadLines("Assets\\Dictionary\\VerbMasterList").ToArray();
+        string[] list = Resources.Load<TextAsset>("Dictionary/VerbMasterList").text.Split("\n");
         System.Random gen = new System.Random();
         word = VerbEntry.Grab(list[gen.Next(list.Length)]);
 
@@ -109,28 +109,7 @@ public class Verb : Translatable
 
     public string IsFormDetailed (string thing)
     {
-        if (FormTense(thing) == -1 && FormConjugation(thing) == -1)
-        {
-        	return "Sentence entered contains a typo."
-        	+ "\n Correct word: " + RuStr();
-        }
-        else if (FormConjugation(thing) == conjugation)
-        {
-        	switch (tense)
-        	{
-        		default:
-        		case 0:
-        			return "Verb tense does not match past tense."
-        			+ "\n Past tense verb was expected: " + RuStr();
-        		case 1:
-        			return "Verb is not in the present."
-        			+ "\n Present tense verb was expected: " + RuStr();
-        		case 2:
-        			return "Verb is not in the future."
-        			+ "\n Future (will do) tense was expected" + RuStr();
-        	}
-        }
-        else // FormTense(thing) == tense
+        if (FormTense(thing) == tense)
         {
         	if (tense == 0)
         	{
@@ -138,17 +117,17 @@ public class Verb : Translatable
 				{
 					default:
 					case 0:
-						return "For past, conjugation matches gender (like an adjective)."
-						+ "\n Masculine conjugation was expected: " + RuStr();
+						return RuStr() + "\n\nFor past, conjugation matches gender."
+						+ "\n Similar to an adjective.";
 					case 1:
-						return "For past, conjugation matches gender (like an adjective)."
-						+ "\n Feminine conjugation was expected: " + RuStr();
+						return RuStr() + "\n\nFor past, conjugation matches gender."
+						+ "\n Similar to an adjective.";
 					case 2:
-						return "For past, conjugation matches gender (like an adjective)."
-                        + "\n Neuter conjugation was expected: " + RuStr();
+						return RuStr() + "\n\nFor past, conjugation matches gender."
+                        + "\n Similar to an adjective.";
 					case 3:
-						return "For past, conjugation matches gender (like an adjective)."
-                        + "\n Plural conjugation was expected: " + RuStr();
+						return RuStr() + "\n\nFor past, conjugation matches gender."
+                        + "\n Similar to an adjective.";
 				}
         	}
         	else
@@ -157,26 +136,41 @@ public class Verb : Translatable
         		{
         			default:
                     	case 0:
-                    		return "Conjugation must match subject perspective."
-                    		+ "\n \"I\" conjugation was expected: " + RuStr();
+                    		return RuStr() + "\n\nConjugation must match subject perspective."
+                    		+ "\n \"I\" am the subject.";
                     	case 1:
-                    		return "Conjugation must match subject perspective."
-                            + "\n \"You\" conjugation was expected: " + RuStr();
+                    		return RuStr() + "\n\nConjugation must match subject perspective."
+                            + "\n \"You\" are the subject.";
                     	case 2:
-                    		return "Conjugation must match subject perspective."
-                            + "\n \"He/She/It\" conjugation was expected: " + RuStr();
+                    		return RuStr() + "\n\nConjugation must match subject perspective."
+                            + "\n \"He/She/It\" is the subject.";
                     	case 3:
-                    		return "Conjugation must match subject perspective."
-                            + "\n \"We\" conjugation was expected: " + RuStr();
+                    		return RuStr() + "\n\nConjugation must match subject perspective."
+                            + "\n \"We\" are the subject.";
                         case 4:
-                        	return "Conjugation must match subject perspective."
-                            + "\n \"You (plural)\" conjugation was expected: " + RuStr();
+                        	return RuStr() + "\n\nConjugation must match subject perspective."
+                            + "\n \"You (all)\" are the subject.";
                         case 5:
-                        	return "Conjugation must match subject perspective."
-                        	+ "\n \"They\" conjugation was expected: " + RuStr();
+                        	return RuStr() + "\n\nConjugation must match subject perspective."
+                        	+ "\n \"They\" are the subject.";
         		}
         	}
         }
+        else if (FormConjugation(thing) == conjugation)
+        {
+                    switch (tense)
+                    {
+                        default:
+                        case 0:
+                            return RuStr() + "\n\nVerb tense does not match past tense.";
+                        case 1:
+                            return RuStr() + "\n\nVerb is not in the present.";
+                        case 2:
+                            return RuStr() + "\n\nVerb is not in the future.";
+                    }
+                }
+
+        return RuStr() + "\n\nYou'll get it soon!";
     }
 
     private int FormTense (string thing)

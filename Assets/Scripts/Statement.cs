@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Statement 
 {
-    private readonly int CHOICES = 4;
+    private readonly int CHOICES = 5;
     private Translatable[] sentence;
 
 
@@ -33,6 +33,10 @@ public class Statement
             	sentence = new Translatable[1];
             	sentence[0] = new Subject();
             	break;
+            case 5:
+            	sentence = new Translatable[1];
+            	sentence[0] = new Day();
+            	break;
         }
     }
 
@@ -45,6 +49,8 @@ public class Statement
             else
             	break;
         }
+
+        Debug.Log("New Statement: " + RuStr());
     }
 
     public string EnStr ()
@@ -58,6 +64,24 @@ public class Statement
         }
 
         return translation.Substring(0, translation.Length-1);
+    }
+
+    public string EnDisplay ()
+    {
+        string translation = "";
+
+        foreach (Translatable word in sentence)
+        {
+            if (word == null) break;
+            translation += word.EnStr() + " ";
+        }
+
+        translation =
+            translation.ToUpper()[0] +
+            translation.Substring(1, translation.Length-2) +
+            ".";
+
+        return translation;
     }
 
     public string Verify (string line)

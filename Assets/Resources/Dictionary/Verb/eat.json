@@ -1,0 +1,16 @@
+{
+    "infinitive": "есть",
+    "engpast": "ate",
+    "engpresent": "eat",
+
+    "pair": "съесть",
+    "imperfective": true,
+    "isIrregular": true,
+
+    "past": ["ел", "ела", "ело", "ели"],
+    "present": ["ем", "ешь", "ест", "едим" ,"едите", "едят"],
+    "future": [],
+
+    "predicted": ["bread ", "pizza "],
+    "subDeclension": 3
+}

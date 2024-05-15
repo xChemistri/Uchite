@@ -29,10 +29,11 @@ public class Number : Translatable
 	public string IsFormDetailed (string thing)
 	{
 		if (!IsForm(thing))
-			return "Incorrect number.";
+			return RuStr() + "\n\nYou'll get it next time!\nPromise!";
 		else
 			return "Correct.";
 	}
+
     public string RuStr ()
     {
         string translation = "";

@@ -1,0 +1,16 @@
+{
+    "infinitive": "пить",
+    "engpast": "drank",
+    "engpresent": "drink",
+
+    "pair": "съесть",
+    "imperfective": true,
+    "isIrregular": true,
+
+    "past": ["пил", "пила", "пило", "пили"],
+    "present": ["пью", "пьёшь", "пьёт", "пьём" ,"пьёте", "пьют"],
+    "future": [],
+
+    "predicted_subjects": ["juice ", "milk ", "coffee ", "water "],
+    "subDeclension": 3
+}

@@ -16,7 +16,7 @@ public class Subject : Translatable
     private int gender = 0;
     public int Gender
     {
-        get { return gender; }
+        get { return this.gender; }
     }
 
     private bool plural = false;
@@ -29,20 +29,23 @@ public class Subject : Translatable
 
     public Subject (string word)
     {
-        if (!File.Exists("Assets\\Dictionary\\Subject\\" + word + ".json"))
-            return;
+        string path = ("Dictionary/Subject/" + word);
+        path = path.Substring(0,path.Length-1);
+        TextAsset ta = Resources.Load<TextAsset>(path);
+        if (ta == null) return;
         
         this.word = SubjectEntry.Grab(word);
         this.gender = this.word.gender;
     }
 
     public Subject ()
-    {
-        string[] list = File.ReadLines("Assets\\Dictionary\\SubjectMasterList").ToArray();
+    {   
+        string[] list = Resources.Load<TextAsset>("Dictionary/SubjectMasterList").text.Split("\n");
         System.Random gen = new System.Random();
 
         this.plural = (gen.Next(2) == 1)? true: false;
         this.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
+        this.gender = this.word.gender;
         this.ExceptionCheck();
     }
 
@@ -52,6 +55,7 @@ public class Subject : Translatable
 
             this.plural = (gen.Next(2) == 1)? true: false;
             this.word = SubjectEntry.Grab(list[gen.Next(list.Length)]);
+            this.gender = this.word.gender;
             this.ExceptionCheck();
         }
 
@@ -87,8 +91,7 @@ public class Subject : Translatable
     	{
     		if (FormPlural(thing) == -1 && FormDeclension(thing) == -1)
     		{
-    			return "Sentence entered contains a typo."
-    			+ "\n Correct word: " + RuStr();
+    			return RuStr() + "\n\nSentence entered contains a typo.";
     		}
     		else if (FormPlural(thing) == (plural ? 1 : 0))
     		{
@@ -96,23 +99,23 @@ public class Subject : Translatable
     			{
     				default:
     				case 0:
-    					return "Nominative cases are used when the object is the subject (What?)."
-    					+ "\n Missing nominative: " + RuStr();
+    					return RuStr() + "\n\nNominative cases are used when the object is the subject (What?)."
+    					+ "\n Missing nominative.";
     				case 1:
-    					return "Genitive cases are used in terms of possession (Whose?)."
-    					+ "\n Missing genitive: " + RuStr();
+    					return RuStr() + "\n\nGenitive cases are used in terms of possession (Whose?)."
+    					+ "\n Missing genitive.";
     				case 2:
-    					return "Dative cases are used to refer to indirect objects (To whom/what?)."
-    					+ "\n Missing dative: " + RuStr();;
+    					return RuStr() + "\n\nDative cases are used to refer to indirect objects (To whom/what?)."
+    					+ "\n Missing dative.";
     				case 3:
-    					return "Accusative cases are used to refer to the object of a sentence."
-    					+ "\n Missing accusative: " + RuStr();;
+    					return RuStr() + "\n\nAccusative cases are used to refer to the object of a sentence."
+    					+ "\n Missing accusative.";
     				case 4:
-    					return "Instrumental cases are used to discuss how something is done (With what?)."
-    					+ "\n Missing instrumental: " + RuStr();
+    					return RuStr() + "\n\nInstrumental cases are used to discuss how something is done (With what?)."
+    					+ "\n Missing instrumental." ;
     				case 5:
-    					return "Prepositional cases are used to denote the location (Where?)."
-    					+ "\n Missing prepositional: " + RuStr();
+    					return RuStr() + "\n\nPrepositional cases are used to denote the location (Where?)."
+    					+ "\n Missing prepositional.";
     			}
     		}
     		else // FormDeclension(thing) == declension
@@ -121,11 +124,11 @@ public class Subject : Translatable
     			{
     				default:
     				case false:
-    					return "There is only one subject in this sentence."
-    					+ "\n Missing singular: " + RuStr();
+    					return RuStr() + "\n\nThere is only one subject in this sentence."
+    					+ "\n Missing singular.";
     				case true:
-    					return "There is multiple subjects in this sentence."
-    					+ "\n Missing plural: " + RuStr();
+    					return RuStr() + "\n\nThere is multiple subjects in this sentence."
+    					+ "\n Missing plural.";
     			}
     		}
     	}
